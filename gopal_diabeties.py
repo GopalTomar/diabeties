@@ -1,5 +1,6 @@
 import streamlit as st
-from Gopal_Notes_Diabetes import show_precautions_for_diabetic, show_precautions_for_non_diabetic
+from Govind_Notes_Diabetes import show_precautions_for_diabetic, show_precautions_for_non_diabetic
+from sklearn.externals import joblib
 
 def predict_diabetes(diabetes_model):
     st.header('', divider='rainbow')
@@ -21,23 +22,18 @@ def predict_diabetes(diabetes_model):
         'Age': 'Enter age (0-122)'
     }
 
-
     diab_prediction = None
-
 
     gender = st.radio("Select Gender", ("Male", "Female"))
     
-
     if gender == "Male":
         pregnancies = 0  # Default value for male
         col1, col2, col3 = st.columns([1, 1, 1])
-        
     else:
         pregnancies = st.number_input('Pregnancies', min_value=0, max_value=17, format="%d",
                                       help=placeholder_values['Pregnancies'])
         col1, col2, col3 = st.columns(3)
 
-    # Getting the input data from the user arranged in three columns
     with col1:
         glucose = st.number_input('Glucose', min_value=0, max_value=200, format="%d",
                                   help=placeholder_values['Glucose'])
@@ -76,9 +72,7 @@ def predict_diabetes(diabetes_model):
         if age < 0 or age > 122:
             st.warning("Please enter age within the range of 0 to 122.")
 
-    # Code for Prediction
     diab_diagnosis = ''
-
 
     if st.button('Diabetes Test Result'):
         user_input = [pregnancies, glucose, blood_pressure, skin_thickness, insulin,
@@ -90,14 +84,4 @@ def predict_diabetes(diabetes_model):
             diab_diagnosis = 'You are Diabetic'
         else:
             diab_diagnosis = 'You are NOT Diabetic'
-        st.markdown("<a href='https://www.who.int/health-topics/diabetes?gad_source=1&gclid=CjwKCAjw_e2wBhAEEiwAyFFFo7LrTeJB-YF0RNzx4PNSP8kQ4Su3WoI3-ebQly1gtgOlsYfhejmmuhoCx6UQAvD_BwE#tab=tab_1'>To know More</a>", unsafe_allow_html=True)
-    st.success(diab_diagnosis)
-
-
-    if diab_prediction is not None:
-        if diab_prediction[0] == 1:
-            show_precautions_for_diabetic()
-            st.markdown("<a href='https://www.who.int/health-topics/diabetes?gad_source=1&gclid=CjwKCAjw_e2wBhAEEiwAyFFFo7LrTeJB-YF0RNzx4PNSP8kQ4Su3WoI3-ebQly1gtgOlsYfhejmmuhoCx6UQAvD_BwE#tab=tab_1'>To know More</a>", unsafe_allow_html=True)
-        else:
-            show_precautions_for_non_diabetic()
-            st.markdown("<a href='https://www.who.int/health-topics/diabetes?gad_source=1&gclid=CjwKCAjw_e2wBhAEEiwAyFFFo7LrTeJB-YF0RNzx4PNSP8kQ4Su3WoI3-ebQly1gtgOlsYfhejmmuhoCx6UQAvD_BwE#tab=tab_1'>To know More about Diabetes</a>", unsafe_allow_html=True)
+        st.markdown("<a href='https://www.who.int/health-topics/diabetes?gad_source=1&gclid
