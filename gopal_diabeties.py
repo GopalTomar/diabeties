@@ -86,4 +86,4 @@ def predict_diabetes(diabetes_model):
             diab_diagnosis = 'You are Diabetic'
         else:
             diab_diagnosis = 'You are NOT Diabetic'
-        st.markdown("<a href='https://www.who.int/health-topics/diabetes?gad_source=1&gclid=CjwKCAjw_e2wBhAEEiwAyFFFo7LrTeJB-YF0RNzx4PNSP8kQ4Su3WoI3-ebQly1gtgOlsYfhejmmuhoCx6UQAvD_Bw
+        st.markdown("<a href='https://www.who.int/health-topics/diabetes?gad_source=1&gclid=CjwKCAjw_e2wBhAEEiwAyFFFo7LrTeJB-YF0RNzx4PNSP8kQ4Su3WoI3-ebQly1gtgOlsYfhejmmuhoCx6UQAvD_BwE#tab=tab_1'>To know More</a>", unsafe_allow_html=True)
